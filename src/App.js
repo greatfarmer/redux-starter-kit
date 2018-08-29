@@ -18,7 +18,9 @@ class App extends Component {
   loadData = async () => {
     const { PostActions, number } = this.props;
     try {
-      const response = await PostActions.getPost(number);
+      const p = PostActions.getPost(number);
+      this.cancelRequest = p.cancel;
+      const response = await p;
       console.log(response);
     } catch(e) {
       console.log(e);
@@ -27,6 +29,11 @@ class App extends Component {
 
   componentDidMount() {
     this.loadData();
+    window.addEventListener('keyup', (e) => {
+      if(e.key === 'Escape') {
+        this.handleCancel();
+      }
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {

@@ -5,10 +5,20 @@ import * as counterActions from './modules/counter';
 import * as postActions from './modules/post';
 
 class App extends Component {
+
+  cancelRequest = null;
+
+  handleCancel = () => {
+    if(this.cancelRequest) {
+      this.cancelRequest();
+      this.cancelRequest = null;
+    }
+  }
+
   loadData = async () => {
-    const { postActions, number } = this.props;
+    const { PostActions, number } = this.props;
     try {
-      const response = await postActions.getPost(number);
+      const response = await PostActions.getPost(number);
       console.log(response);
     } catch(e) {
       console.log(e);
@@ -62,6 +72,6 @@ export default connect(
   }),
   (dispatch) => ({
       CounterActions: bindActionCreators(counterActions, dispatch),
-      postActions: bindActionCreators(postActions, dispatch)
+      PostActions: bindActionCreators(postActions, dispatch)
   })
 )(App);

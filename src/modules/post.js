@@ -1,7 +1,6 @@
 import { handleActions, createAction } from 'redux-actions';
 import { pender, applyPenders } from 'redux-pender';
 import axios from 'axios';
-import reducer from 'redux-pender/lib/reducer';
 
 function getPostAPI(postId) {
   return axios.get(`http://jsonplaceholder.typicode.com/posts/${postId}`);
@@ -18,7 +17,7 @@ const initialState = {
   }
 }
 
-export default handleActions({
+const reducer = handleActions({
   // 다른 일반 액션들을 관리...
 }, initialState);
 

@@ -6,9 +6,9 @@ import * as postActions from './modules/post';
 
 class App extends Component {
   loadData = async () => {
-    const { PostActions, number } = this.props;
+    const { postActions, number } = this.props;
     try {
-      const response = await PostActions.getPost(number);
+      const response = await postActions.getPost(number);
       console.log(response);
     } catch(e) {
       console.log(e);
@@ -57,8 +57,8 @@ export default connect(
   (state) => ({
       number: state.counter,
       post: state.post.data,
-      loading: state.post.pending,
-      error: state.post.error
+      loading: state.pender.pending['GET_POST'],
+      error: state.pender.failure['GET_POST']
   }),
   (dispatch) => ({
       CounterActions: bindActionCreators(counterActions, dispatch),
